@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} {{ article.title }}{% endblock %}
+{% block localCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'website/css/article.css' %}" />
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<h1>{{ article.title }}</h1>
+{{ article.content|safe }}
+{% endblock %}

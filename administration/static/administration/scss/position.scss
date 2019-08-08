@@ -1,0 +1,14 @@
+@import "../../../../static/scss/theme.scss";
+#content {
+  background-color: $accent-color;
+  .bigWarning {
+    color: red;
+  }
+  #scriptHtml {
+    text-align: center;
+    #map {
+      height: 50vh;
+      margin: 5vh;
+    }
+  }
+}

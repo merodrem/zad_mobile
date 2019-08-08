@@ -1,0 +1,26 @@
+@import "../../../../static/scss/theme.scss";
+
+#content {
+  background-color: $accent-color;
+  .container-fluid {
+    margin-top: auto;
+    margin-bottom: auto;
+    .card {
+      background-color: white;
+      margin: 16px;
+      padding: 8px;
+      text-align: center;
+      -webkit-box-shadow: 7px 26px 37px -6px rgba(0, 0, 0, 0.53);
+      -moz-box-shadow: 7px 26px 37px -6px rgba(0, 0, 0, 0.53);
+      box-shadow: 7px 26px 37px -6px rgba(0, 0, 0, 0.53);
+      a {
+        display: block;
+        text-decoration: none;
+        color: black;
+      }
+      i {
+          margin-top: 16px;
+      }
+    }
+  }
+}

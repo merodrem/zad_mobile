@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}nouvel article{% endblock %}
+{% block localCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'administration/css/flash.css' %}" />
+<link rel="stylesheet" href="{% static 'jodit/build/jodit.min.css' %}">
+<script src="{% static 'jodit/build/jodit.min.js' %}"></script>
+{% endblock %}
+{% block content %}
+<div class="form_container">
+    <h1>Rédiger un nouvel article</h1>
+    <div class="container-fluid">
+        <form action="{% url "article" %}" method="post">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+                <input type="text" id="title" placeholder="Titre" name="title" maxlength="100" required>
+            </div>
+            <textarea id="editor" name="content"></textarea>
+            <script>
+                var editor = new Jodit("#editor", {
+                    "uploader": {
+                        "insertImageAsBase64URI": true
+                    }
+                });
+            </script>
+            <div class="row justify-content-center">
+                <button type="submit" class="zad-button">envoyer!</button>
+            </div>
+            {% if form_sent %}Votre article a bien été publié !{% endif %}
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Bienvenue sur le site de la Zad Mobile{% endblock %}
+{% block localCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'website/css/home.css' %}" />
+<link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
+<script src="{% static 'leaflet/leaflet.js' %}"></script>
+<script src="{% static 'conf/conf.js' %}"></script>   
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<div class="background-image">
+</div>
+<div class="row">
+    <div class="col-md-3 flash">
+        <h2>flash info!</h2>
+        {% for info in flash_infos %}
+        <h3><b>{{info.title}}</b> <span>- par {{ info.author }}</span></h3>
+        <p>{{info.content}}</p>
+        {% empty %}
+        <p>aucune info flash depuis une semaine...</p>
+        {% endfor %}
+    </div>
+    <div class="col-md-8">
+        <h1>Bienvenue sur le site de la ZAD mobile!</h1>
+        <h2>Distribution des campements:</h2>
+        <div id="mapid">
+        </div>
+        <script>
+            var mymap = L.map('mapid').setView([46.227638, 2.213749], 5);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets',
+                accessToken: accessToken
+            }).addTo(mymap);
+            var users = JSON.parse('{{ users|safe }}')
+            users.forEach(user => {
+                const markerHtmlStyles = `
+                background-color: ${user.color};
+                width: 2rem;
+                height: 2rem;
+                display: block;
+                left: -1.5rem;
+                top: -1.5rem;
+                position: relative;
+                border-radius: 3rem 3rem 0;
+                transform: rotate(45deg);
+                border: 1px solid #FFFFFF`
+                const icon = L.divIcon({
+                    className: "zad-pin",
+                    iconAnchor: [0, 24],
+                    labelAnchor: [-6, 0],
+                    popupAnchor: [0, -36],
+                    html: `<span style="${markerHtmlStyles}" />`
+                })
+                L.marker([user.latitude, user.longitude], { icon: icon, alt: user.username, riseOnHover: true }).addTo(mymap).bindPopup(user.username);
+            });
+        </script>
+        <h2>Derniers articles</h2>
+        {% for article in last_articles %}
+        <h3 style="display: inline;"><b>{{article.title}}</b></h3>
+        <p style="display: inline;"> - par <i>{{article.author}}</i></p>
+        <a href="articles/{{article.id}}" style="display: block;">lire l'article...</a>
+        <hr>
+        {% empty %}
+        <p>aucun article n'a été trouvé!</p>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}

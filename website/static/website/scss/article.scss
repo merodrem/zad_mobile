@@ -1,0 +1,13 @@
+@import "../../../../static/scss/theme.scss";
+
+#content {
+  @media (min-width: map-get($grid-breakpoints, lg)) {
+    width: 75%;
+    margin: auto;
+  }
+  padding-left: 10px;
+  h1 {
+    text-align: center;
+    font-size: 48px;
+  }
+}

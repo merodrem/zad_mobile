@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Liste des articles{% endblock %}
+{% block localCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'website/css/news.css' %}" />
+{% endblock %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<marquee>
+    {% for info in flash_infos %}
+    <h3>{{info.title}} - par <b>{{info.author}}</b> le {{ info.date }}</h3>
+    <p><i>{{info.content}}</i></p>
+    {% empty %}
+    <p>aucune info flash depuis une semaine...</p>
+    {% endfor %}
+</marquee>
+
+{% for date, articles in orderedArticles.items %}
+<h1>{{date}}</h1>
+{% for article in articles %}
+<h2 style="display: inline;"><b>{{article.title}}</b></h2>
+<p style="display: inline;"> - par <i>{{article.author__username}}</i></p>
+<a href="articles/{{article.id}}" style="display: block;">lire l'article...</a>
+<br>
+{% endfor %}
+{% endfor %}
+{% endblock %}

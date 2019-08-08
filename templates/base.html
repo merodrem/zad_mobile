@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-grid.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
+    {% block localCSS %}
+    {% endblock %}
+    <title>{% block title %}Zad Partout!{% endblock %}</title>
+</head>
+
+<body>
+    <nav>
+        {% block nav %}
+        <ul>
+            <li>
+                <a href="{% url "home" %}"><i class='fas fa-home' style='font-size:20px'></i></a>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">À propos</a>
+                <div class="dropdown-content">
+                    <a href="#">La ZAD mobile, c'est quoi?</a>
+                    <a href="#">Contre quoi luttons-nous?</a>
+                    <a href="#">Notre charte</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Documentation</a>
+                <div class="dropdown-content">
+                    <a href="#">Vos droits face aux schmitts</a>
+                    <a href="#">Comment agir en cas d'arrestation</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:void(0)" class="dropbtn">Infos pratiques</a>
+                <div class="dropdown-content">
+                    <a href="#">Rejoindre la ZAD mobile</a>
+                    <a href="#">Nous soutenir</a>
+                    <a href="#">Contact</a>
+                </div>
+            </li>
+            <li><a href="{% url "flash_info" %}">Dernières nouvelles</a></li>
+            <li>
+                {% if user.is_authenticated %}
+            <li class="social-media"><a href="{% url "logout" %}"><i class='fas fa-power-off'
+                        style='font-size:20px'></i></a></li>
+            {% else %}
+            <li class="social-media"><a href="https://www.facebook.com/Nongcoalsace67/" target="_blank"><i
+                        class="fab fa-facebook-square"></i></a></li>
+            <li class="social-media"><a href="https://twitter.com/ZADixGCO" target="_blank"><i
+                        class="fab fa-twitter-square"></i></a>
+            </li>
+            <li class="social-media"><a href="https://www.youtube.com/channel/UCQypjiUpZYmeTkTUNMmiPXQ"
+                    target="_blank"><i class="fab fa-youtube"></i></a></li>
+            {% endif %}
+            </li>
+        </ul>
+        {% endblock %}
+    </nav>
+    <header>
+        {% block header %}
+        {% endblock %}
+    </header>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        <ul>
+            <li>
+                <p>copyleft Zad Mobile {{ year }} </p>
+            </li>
+            <li class='admin'>
+                <p><a href="{% url "dashboard" %}"><i class='fas fa-user-shield' style='font-size:20px'></i> admin</a>
+                </p>
+            </li>
+        </ul>
+    </footer>
+</body>
+
+</html>

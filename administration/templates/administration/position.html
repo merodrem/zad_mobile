@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Mettez à jour la position de la zad!{% endblock %}
+{% block localCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'administration/css/position.css' %}" />
+<link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
+<script src="{% static 'leaflet/leaflet.js' %}"></script>
+{% endblock %}
+{% block content %}
+<form action="{% url "position" %}" method="post">
+    {% csrf_token %}
+    <noscript>
+        <style type="text/css">
+            #scriptHtml {
+                display: none;
+            }
+        </style>
+        <p class="bigWarning">La carte ne s'affiche pas sans javascript! Active javascript et recharge la page.</p>
+        <p class="bigWarning"> Ou bien, entre manuellement les coordonée gps ci-dessous:</p>
+    </noscript>
+    {% for message in messages %}
+
+    <div class="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    <div id="scriptHtml">
+        <h1>Selectionne un point sur la carte:</h1>
+        <div id="map">
+            <script>
+                var mymap = L.map('map').setView(["{{ lat }}", "{{ long }}"], 10);
+                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFya2l0IiwiYSI6ImNqcWNjNnZuZDN1MGo0OGxjMWJhdzZvMzUifQ.d2gvGX2ZEebSQoqZaWbZTA', {
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    maxZoom: 18,
+                    id: 'mapbox.streets',
+                    accessToken: 'your.mapbox.access.token'
+                }).addTo(mymap);
+                var positionMarker = L.marker(["{{ lat }}", "{{ long }}"]).addTo(mymap);
+                function onMapClick(e) {
+                    positionMarker.setLatLng(e.latlng)
+                    document.getElementById('longitude').value = e.latlng.lng
+                    document.getElementById('latitude').value = e.latlng.lat
+                }
+                mymap.on('click', onMapClick);
+            </script>
+        </div>
+        <p><i>alternativement, tu peux aussi rentrer manuellement les coordonée GPS ci-dessous:</i></p>
+    </div>
+    <div class="row justify-content-center">
+        <table>
+            <tr>
+                <td>
+                        <label for="longitude">longitude: </label>
+                </td>
+                <td>
+                        <input type="text" id="longitude" value="{{ placeholder_long }}" name="longitude">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                        <label for="latitude">latitude: </label>
+                </td>
+                <td>
+                        <input type="text" id="latitude" value="{{ placeholder_lat }}" name="latitude">
+                </td>
+            </tr>
+        </table>
+        
+        
+    </div>
+    <div class="row justify-content-center">
+            <a href="{% url "reset_location" %}" class="zad-button alert">Masquer ma localisation</a> 
+            <button type="submit" class="zad-button">valider!</button>
+    </div>
+
+</form>
+{% endblock %}

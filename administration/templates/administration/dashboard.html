@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}panneau d'administration{% endblock %}
+{% block localCSS %}
+<link rel="stylesheet" type="text/css" href="{% static 'administration/css/dashboard.css' %}" />
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <h1>PANNEAU D'ADMINISTRATION</h1>
+    </div>
+    <div class="row justify-content-around">
+        <div class="col-md-3 card">
+            <i class="fas fa-exclamation-triangle fa-5x"></i>
+            <a href="{% url "flash" %}" class="zad-button">envoyer une info flash!</a>
+        </div>
+        <div class="col-md-3 card">
+            <i class="fas fa-edit fa-5x"></i>
+            <a href="{% url "article" %}" class="zad-button">Rédiger un article</a>
+        </div>
+        <div class="col-md-3 card">
+            <i class="fas fa-map-marked-alt fa-5x"></i>
+            <a href="{% url "position" %}" class="zad-button">mettre à jour l'emplacement de la zad</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

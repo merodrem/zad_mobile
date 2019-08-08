@@ -1,0 +1,98 @@
+@import "theme";
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: $primary-color;
+    font-size: 20px;
+    li {
+      float: left;
+      a {
+        display: block;
+        text-align: center;
+        padding: 16px;
+        color: white;
+        text-decoration: none;
+        -webkit-transition: background-color 0.4s ease;
+        -moz-transition: background-color 0.4s ease;
+        -o-transition: background-color 0.4s ease;
+        transition: background-color 0.4s ease;
+      }
+      a:hover {
+        background-color: #333;
+        color: white;
+        text-decoration-line: none;
+      }
+    }
+    .dropdown {
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: $primary-color;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.5);
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  }
+  .social-media {
+    float: right;
+  }
+}
+
+#content {
+  min-height: calc(100vh - #{$footer_height});
+  padding-top: $navbar_height;
+  overflow-y: auto;
+  overflow-x: hidden
+  
+}
+
+footer {
+  padding-left: 5px;
+  padding-right: 5px;
+  bottom: 0;
+  width: 100%;
+  height: $footer_height;
+  background-color: $primary-color;
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-size: 14px;
+    height: $footer_height;
+    li {
+      float: left;
+      height: $footer_height;
+      a,
+      p {
+        display: block;
+        text-align: center;
+        color: white;
+        text-decoration: none;
+        -webkit-transition: background-color 0.4s ease;
+        -moz-transition: background-color 0.4s ease;
+        -o-transition: background-color 0.4s ease;
+        transition: background-color 0.4s ease;
+      }
+      a:hover {
+        background-color: #333;
+        color: white;
+        text-decoration-line: none;
+      }
+    }
+  }
+  .admin {
+    float: right;
+  }
+}
