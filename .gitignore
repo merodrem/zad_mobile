@@ -88,4 +88,6 @@ local_settings.py
 .env
 db.sqlite3
 
-/static/conf/
+/static/conf/conf.js
+.sass-cache/
+.vscode/
