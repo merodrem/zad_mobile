@@ -57,6 +57,13 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+# if os.environ.get('ENV') == 'PRODUCTION':
+#     # ...
+#     # Simplified static file serving.
+#     # https://warehouse.python.org/project/whitenoise/
+#     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#     #STATICFILES_STORAGE ='django.contrib.staticfiles.storage.StaticFilesStorage'
+
 LOGIN_REDIRECT_URL = 'administration/'
 LOGIN_URL = '/login'
 
