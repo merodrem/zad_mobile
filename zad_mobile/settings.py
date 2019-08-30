@@ -26,10 +26,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', "dev_key_dummy") # development key for
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get('ENV') == 'PRODUCTION':
     DEBUG = False
+    ALLOWED_HOSTS = ['zad-mobile-test.herokuapp.com']
 else:
     DEBUG = True
+    ALLOWED_HOSTS = []
 
-ALLOWED_HOSTS = ['zad-mobile-test.herokuapp.com']
 
 
 # Application definition
@@ -93,8 +94,12 @@ WSGI_APPLICATION = 'zad_mobile.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'zad_mobile',
+        'USER': 'julien', 
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '5432',
     }
 }
 
