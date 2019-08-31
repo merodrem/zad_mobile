@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'website/css/home.css' %}" />
 <link rel="stylesheet" href="{% static 'leaflet/leaflet.css' %}">
 <script src="{% static 'leaflet/leaflet.js' %}"></script>
-<script src="{% static 'conf/conf.js' %}"></script>   
+<script src="{% static 'conf/conf.js' %}"></script>
 {% endblock %}
 {% block header %}
 {% endblock %}
@@ -55,7 +55,9 @@
                     popupAnchor: [0, -36],
                     html: `<span style="${markerHtmlStyles}" />`
                 })
-                L.marker([user.latitude, user.longitude], { icon: icon, alt: user.username, riseOnHover: true }).addTo(mymap).bindPopup(user.username);
+                if (user.latitude && user.longitude) {
+                    L.marker([user.latitude, user.longitude], { icon: icon, alt: user.username, riseOnHover: true }).addTo(mymap).bindPopup(user.username);
+                }
             });
         </script>
         <h2>Derniers articles</h2>

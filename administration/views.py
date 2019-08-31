@@ -39,8 +39,6 @@ def reset_location(request):
 def position(request):
         form_sent = False
         form = UserLocationForm(data = request.POST or None, instance=request.user)
-        print(request.POST)
-        print(form.errors)
         if form.is_valid():
                 form.save()
                 form_sent = True
