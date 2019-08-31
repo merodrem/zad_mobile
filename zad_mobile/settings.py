@@ -64,6 +64,8 @@ MIDDLEWARE = [
 #     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #     #STATICFILES_STORAGE ='django.contrib.staticfiles.storage.StaticFilesStorage'
 
+SECURE_SSL_REDIRECT = True
+
 LOGIN_REDIRECT_URL = 'administration/'
 LOGIN_URL = '/login'
 
