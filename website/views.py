@@ -10,7 +10,7 @@ from .models import FlashInfo, Article, User
 
 def home(request):
     one_week_ago = datetime.now() - timedelta(days=7)
-    users = list(User.objects.all().values())
+    users = list(User.objects.all().values('username', 'color', 'longitude', 'latitude'))
     flash_infos = FlashInfo.objects.filter(date__gt=one_week_ago)
     last_articles = Article.objects.all()[:5]
     return render(request, 'website/home.html', {'flash_infos': flash_infos, 'last_articles': last_articles, 'users': json.dumps(users, cls=DjangoJSONEncoder)})
